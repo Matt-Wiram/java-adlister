@@ -6,10 +6,14 @@
     </jsp:include>
 </head>
 <body>
+
     <jsp:include page="partials/navbar.jsp" />
 
     <div class="container">
-        <h1>Viewing your profile.</h1>
+        <h1>Viewing your profile username</h1>
+        <form action="/logout" method="POST">
+        <button>Logout</button>
+        </form>
     </div>
 
 </body>
