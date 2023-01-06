@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
 
 //        request.getSession().setAttribute("user", user.getUsername());
 //        response.sendRedirect("/profile.jsp");
-        response.sendRedirect("/WEB-INF/profile.jsp");
+        request.getSession().setAttribute("user", user.getUsername());
+        response.sendRedirect("/profile");
     }
 }
