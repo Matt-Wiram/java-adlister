@@ -1,7 +1,9 @@
 package com.codeup.adlister.dao;
-
+import com.codeup.adlister.config.Config;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
 import com.mysql.cj.jdbc.Driver;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -26,6 +28,7 @@ public class MySQLUsersDao implements Users {
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
         try {
+            System.out.println("asdf");
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, username);
             return extractUser(stmt.executeQuery());
@@ -38,10 +41,15 @@ public class MySQLUsersDao implements Users {
     public Long insert(User user) {
         String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
         try {
+            String pw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(6));
+            System.out.println(pw.length());
+
+
+
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(3, pw);
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();

@@ -6,14 +6,15 @@
     </jsp:include>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
+
     <div class="container">
         <h1>Please Log In</h1>
-        <form action="/login" method="POST">
+        <form action="/login" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input id="username" name="username" class="form-control" type="text">
             </div>
+
             <div class="form-group">
                 <label for="password">Password</label>
                 <input id="password" name="password" class="form-control" type="password">
